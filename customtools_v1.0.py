@@ -139,15 +139,16 @@ def follicelcontrol(*args):
             #create a PlusminusAverage node and make the respective connections 
             pma=cmds.createNode("plusMinusAverage",n=i+"_PMA")
             
-            MD01=cmds.createNode("multiplyDivide",n=i+"_neg_MD")
-            MD02=cmds.createNode("multiplyDivide",n=i+"MD_offset")
+            MD01=cmds.createNode("multiplyDivide",n=circle_ctrl[0]+"_neg_MD")
+            MD02=cmds.createNode("multiplyDivide",n=circle_ctrl[0]+"MD_offset")
+            MD03=cmds.createNode("multiplyDivide",n=circle_ctrl[0]+"MD_offset")
            
             #extra attributes for the follicle control
             cmds.addAttr(circle_ctrl[0], ln = "X_senstivity",  at='float',  min=0, dv=0.1, k=1)
             cmds.addAttr(circle_ctrl[0], ln = "Y_senstivity",  at='float',  min=0, dv=0.1, k=1)
             
-            cmds.addAttr(circle_ctrl[0], ln = "X_Offset",  at='float', dv=0.1, k=1)
-            cmds.addAttr(circle_ctrl[0], ln = "Y_Offset",  at='float', dv=0.1, k=1)
+            cmds.addAttr(circle_ctrl[0], ln = "X_Offset",  at='float', dv=0, k=1)
+            cmds.addAttr(circle_ctrl[0], ln = "Y_Offset",  at='float', dv=0, k=1)
             
             #use a offsetMD node to control the sensitivity of controls
             cmds.connectAttr(circle_ctrl[0]+".translateX",MD02+".input1X")
@@ -165,9 +166,14 @@ def follicelcontrol(*args):
             cmds.connectAttr(MD02+".outputX",pma+".input2D[1].input2Dx")
             cmds.connectAttr(MD02+".outputY",pma+".input2D[1].input2Dy")
             #xoffset and y offset connections
+            cmds.connectAttr(circle_ctrl[0]+".X_Offset",MD03+".input1X")
+            cmds.connectAttr(circle_ctrl[0]+".Y_Offset",MD03+".input1Y")
+            cmds.setAttr(MD03+".input2X",0.1)
+            cmds.setAttr(MD03+".input2Y",0.1)
             
-            cmds.connectAttr(circle_ctrl[0]+".X_Offset",pma+".input2D[2].input2Dx")
-            cmds.connectAttr(circle_ctrl[0]+".Y_Offset",pma+".input2D[2].input2Dy")
+            
+            cmds.connectAttr(MD03+".outputX",pma+".input2D[2].input2Dx")
+            cmds.connectAttr(MD03+".outputY",pma+".input2D[2].input2Dy")
             
             cmds.setAttr(pma+".input2D[0].input2Dx",0.5)
             cmds.setAttr(pma+".input2D[0].input2Dy",0.5)
