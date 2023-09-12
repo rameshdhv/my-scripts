@@ -1,4 +1,5 @@
 def create_AddBlendshape():
+    #select all targets first and main geo 
     import maya.cmds as cmds
     sel=cmds.ls(sl=1)
     iso_sel=sel[:-1]
