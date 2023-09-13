@@ -1,6 +1,6 @@
 def DynamicRig():
 
-    
+    #select FK controls in sequence and run the script
     ########################################################################
     def make_curves_dynamic():
         import maya.mel as mel
@@ -201,7 +201,7 @@ def create_AddBlendshape():
     
 
 
-
+#select all controls then reference control curve and run the script
 def swapControlCurves():
     import maya.cmds as cmds
     sel=cmds.ls(sl=1)
@@ -233,7 +233,7 @@ def swapControlCurves():
 
 
 
-
+#select the objects in order you wish to parent
 def parentSequence():
     import maya.cmds as cmds
     sel=cmds.ls(sl=1)
