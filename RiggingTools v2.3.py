@@ -1,3 +1,9 @@
+"""
+---------------------------------------------------------
+Author: Ramesh Darisi
+--------------------------------------------------------
+
+"""
 def DynamicRig():
 
     #select FK controls in sequence and run the script
@@ -252,7 +258,8 @@ def parentSequence():
 
 
 def controlatpivot():
-    
+    # creates a control along with joint on each vertex/object selected.
+    # when Local option is checked control follows the axis of object/vertex selected
     import maya.cmds as cmds
     c_global=cmds.checkBox("CGlobal",q=True,value=True)
     c_local=cmds.checkBox("CLocal",q=True,value=True)
@@ -296,6 +303,8 @@ def controlatpivot():
         cmds.warning("Select only one Axis")
         
 def jointatselection():
+    # creates  joint on each vertex/object selected
+    # when Local option is checked joint follows the axis of object/vertex selected
     import maya.cmds as cmds
     j_global=cmds.checkBox("JGlobal",q=True,value=True)
     j_local=cmds.checkBox("JLocal",q=True,value=True)
@@ -335,6 +344,7 @@ def jointatselection():
 
 
 def grouping():
+    #select all objects and run the script
     import maya.cmds as cmds
     sel = cmds.ls(sl=1)
     if len(sel) == 0:
@@ -347,6 +357,7 @@ def grouping():
 
 
 def Zeroout():
+    # zeroout applies for list of selected items
     import maya.cmds as cmds
     sel = cmds.ls(sl=1)
     for i in sel:
@@ -357,6 +368,7 @@ def Zeroout():
 
 
 def follicleAtPivot():
+    #creates follicle at each object/vertex selected
     import maya.cmds as cmds
     import maya.mel as mel
     sel = cmds.ls(sl=1, fl=1)
@@ -384,6 +396,10 @@ def follicleAtPivot():
 
 
 def follicelcontrol():
+    #select only one surface at a time and run the script
+    #Follicle control follows the respective surface
+    
+    
 
     
     
@@ -536,5 +552,5 @@ def customwindow(name):
     
     
     
-customwindow("Rigging Tools V2.3")
+customwindow("Rigging Tools V2.3 - RameshDarisi")
     
