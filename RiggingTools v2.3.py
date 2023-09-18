@@ -7,20 +7,11 @@ Author: Ramesh Darisi
 def DynamicRig():
 
     #select FK controls in sequence and run the script
-    ########################################################################
-    def make_curves_dynamic():
-        import maya.mel as mel
-        import sys
-        mel_script_path = "C:/Users/whoam/OneDrive/Documents/maya/2022/scripts/makecurves_dynamic.mel"
-        
-        if mel_script_path not in sys.path:
-            sys.path.append(mel_script_path)
-            
-        mel.eval('source "{}"'.format(mel_script_path))  
-    ##################################################################### 
+    
     
        
     import maya.cmds as cmds
+    import maya.mel as mel
     sel=cmds.ls(sl=1)
     
     division=3
@@ -65,7 +56,8 @@ def DynamicRig():
         cmds.select(ref_crv)
         
         
-        make_curves_dynamic() 
+        
+        mel.eval('makeCurvesDynamic 2 { "1", "0", "1", "1", "0"};')
         
         #sort the wanted nodes and group them
         hairshapenodes=[]
