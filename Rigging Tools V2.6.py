@@ -434,10 +434,24 @@ def jointatselection():
         cmds.warning("Please Select atleat 1 Object")
     else:    
         for i in sel:
+            
+            
             cmds.select(cl=1)
-            jnt = cmds.joint()
-            pointlocation = cmds.xform(i, q=True, ws=True, t=1)
-            jntlocation = cmds.xform(jnt, ws=1, t=pointlocation)
+            jnt = cmds.joint(n=i+"_Jnt")
+            cmds.matchTransform(jnt,i)
+            cmds.select(cl=1)
+            
+            ctrl=cmds.circle(ch=0,r=3,nr=(1,0,0),n=i+"_Ctrl")
+            cmds.setAttr(ctrl[0]+".overrideEnabled",1)
+            cmds.setAttr(ctrl[0]+".overrideColor",17)
+            
+            ctrl_grp=cmds.group(ctrl,n=i+"_Ctrl_Group")
+            
+            cmds.matchTransform(ctrl_grp,jnt)
+            cmds.parent(jnt,ctrl)
+            cmds.select(cl=1)
+            
+            
 
     
             
