@@ -223,12 +223,12 @@ def DynamicRig():
         
         
         
-        dyn_grp=cmds.group(ikh[0],output_crv,n=sel[0]+"_Dyn_Deformers_Group")
-        dyn_jnt_grp=cmds.group(jntset[0],r=True,n=sel[0]+"_Dyn_Jnt_Group")
+        dyn_grp=cmds.group(ikh[0],output_crv,n=sel[0]+"_Dynamic_Deformers_Group")
+        dyn_jnt_grp=cmds.group(jntset[0],r=True,n=sel[0]+"_Dynamic_Jnt_Group")
         cmds.matchTransform(dyn_jnt_grp,jntset[0],piv=True)
         cmds.parent(grp,dyn_jnt_grp)
         cmds.select(cl=1)
-        cmds.parent(dyn_jnt_grp,dyn_grp)
+        #cmds.parent(dyn_jnt_grp,dyn_grp)
         
         
         cmds.delete(hairnodes[1][0]+"Follicles")
@@ -423,7 +423,7 @@ def controlatpivot():
     elif c_global==True and c_local==True:
         cmds.warning("Select only one Axis")
         
-def jointatselection():
+def controlatselection():
     # creates  joint on each vertex/object selected
     # when Local option is checked joint follows the axis of object/vertex selected
     import maya.cmds as cmds
@@ -651,7 +651,7 @@ def customwindow(name):
     cmds.setParent("..")
     
     cmds.columnLayout()
-    cmds.button(label="Create Control at Each Pivot",c="jointatselection()",width=wWidth,height=wHeight/18,bgc=(0,0.2,0.2))
+    cmds.button(label="Create Control at Selection",c="controlatselection()",width=wWidth,height=wHeight/18,bgc=(0,0.2,0.2))
     
     cmds.setParent("..")
     
