@@ -68,9 +68,9 @@ for obj in skinclusterlist:
         nskinjnts="Skin_"+i
         new_skinjntlist.append(nskinjnts)
     cmds.skinCluster(obj,edit=True,ai=new_skinjntlist,lw=True,wt=0)
-    connections = listConnections(obj, c=1, d=1, type="mesh")
+    connections = cmds.skinCluster(obj, query=True, geometry=True)
     if connections:
-        associated_geo = connections[1]
+        associated_geo = connections[0]
         # Rest of your code that uses associated_geo
     
         select(associated_geo+".vtx[*]")
